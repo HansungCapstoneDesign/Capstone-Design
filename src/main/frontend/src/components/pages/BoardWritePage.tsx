@@ -52,8 +52,8 @@ const BoardWrite = () => {
 
     const request_qna = {
       title: title,
-      content: content,
-      // point: //포인트 설정
+      content: content
+      // point
       // language
     };
 
@@ -161,18 +161,7 @@ const BoardWrite = () => {
               <input type="file" multiple onChange={onSaveFiles}/>
             </div>
           </Grid>
-          <Grid item>
-            <TextField
-              className="board context"
-              id="board_content"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              multiline
-              rows={20}
-              placeholder={"내용을 작성해주세요."}
-              fullWidth
-            ></TextField>
-          </Grid>
+
           {SelectPoint}
           <Grid item>
             <Button
