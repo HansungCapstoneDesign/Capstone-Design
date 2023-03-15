@@ -10,8 +10,8 @@ import BookmarkIcon from '@mui/icons-material/BookmarkBorder';
 import ChatIcon from '@mui/icons-material/ChatBubbleOutline';
 import ProfileIcon from '@mui/icons-material/AccountCircle';
 import MostViewedPost from '../../layout/MostViewedPost';
+import { languageImage } from '../../data/Image';
 import axios from "axios";
-import c from "../../data/c_logo.png"
 
 // BoardItems 인터페이스
 interface BoardItems {
@@ -68,10 +68,18 @@ const QnABaord: React.FC = () => {
         <Typography variant="h5" sx={{marginTop: 8, marginBottom: 5}}>Q&A 게시판</Typography>
         <Box>
             {boardItems?.map((value) => {
-            // 언어선택 여부에 따른 이미지 넣기 조정
-            const LanguageImg = value.language ? (
-                <img src={c} width="25" height="25"/> // 이미지 관련 논의 필요, 정적 파일로 임시 지정
-            ) : null;
+
+            // 선택한 언어에 따른 해당 언어의 로고 이미지 출력
+            const language = value.language ? (
+                languageImage.map((data, index) => {
+                    if (value.language === data.name) {
+                        return (
+                            <img src={data.url} width="25" height="25"/>
+                        )
+                    } 
+                })
+            ) : (null);
+
 
             return (
                 <>
@@ -96,7 +104,7 @@ const QnABaord: React.FC = () => {
                     </Typography>
                     <Box sx={{display: 'flex'}}>
                         <Typography sx={{marginRight: 1}}>{value.time}</Typography>
-                        {LanguageImg}
+                        {language}
                     </Box>
                 </Box>
                 <Box sx={{marginTop: 1, marginBottom: 1}}>{value.content}</Box>

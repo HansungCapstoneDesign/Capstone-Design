@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import {
   Box, Typography,
 } from '@mui/material';
-import {MostViewedItems} from "../pages/Board/QnABoard";
-import c from "../data/c_logo.png"
+import { MostViewedItems } from "../pages/Board/QnABoard";
+import { languageImage } from '../data/Image';
 
 // props 인터페이스
 interface MostViewedPostProps {
@@ -28,9 +28,16 @@ const MostViewedPost: React.FC<MostViewedPostProps> = (props) => {
         <Box sx={{ display: 'flex', justifyContent:'space-between', marginTop:5 }}>
         {props.data.map((value, index) => {
 
-            const LanguageImg = value.language ? (
-            <img src={c} width="25" height="25"/> // 이미지 관련 논의 필요, 정적 파일로 임시 지정
-            ) : (null); 
+             // 선택한 언어에 따른 해당 언어의 로고 이미지 출력
+             const language = value.language ? (
+                languageImage.map((data, index) => {
+                    if (value.language === data.name) {
+                        return (
+                            <img src={data.url} width="25" height="25"/>
+                        )
+                    } 
+                })
+            ) : (null);
 
             return (
                 <>
@@ -48,7 +55,7 @@ const MostViewedPost: React.FC<MostViewedPostProps> = (props) => {
                 }}
                 onClick={()=>goToPost(value.id)}
                 >
-                    {LanguageImg}
+                    {language}
                     <Box sx={{
                     bottom:0,
                     position: "absolute", 

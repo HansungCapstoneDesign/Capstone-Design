@@ -6,11 +6,11 @@ import react from "../data/react_logo.png";
 //언어 - 이미지 처리 데이터
 export const languageImage = [
     {
-        name:"c",
+        name:"C",
         url: c
-    },
+    }, 
     {
-        name:"javascript",
+        name:"JavaScript",
         url: js
     },
     {
@@ -18,7 +18,7 @@ export const languageImage = [
         url: java
     },
     {
-        name:"react",
+        name:"React",
         url: react
     },
 ]
