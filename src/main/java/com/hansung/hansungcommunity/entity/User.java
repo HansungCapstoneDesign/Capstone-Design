@@ -35,7 +35,7 @@ public class User {
     // private String todayComment; // 오늘의 한마디 (테이블 분리 ?)
     // private Image profileImage // 프로필 사진, 추후 개발
     // private String skillStack; // 기술 스택, 추후 개발
-
+    @OrderBy("createdAt DESC")
     @OneToMany(mappedBy = "user")
     private List<FreeBoard> postFreeBoards = new ArrayList<>();
 
@@ -43,7 +43,8 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<QnaBoard> postQnaBoard = new ArrayList<>();
 
-    public User(String studentId, String name, String nickname, String introduce, String track1, String track2) {
+    public User(Long id,String studentId, String name, String nickname, String introduce, String track1, String track2) {
+        this.id = id;
         this.studentId = studentId;
         this.name = name;
         this.nickname = nickname;
@@ -54,6 +55,7 @@ public class User {
 
     public static User of(UserRequestDto dto){
         return new User(
+                dto.getId(),
                 dto.getStudentId(),
                 dto.getName(),
                 dto.getNickname(),
@@ -61,7 +63,10 @@ public class User {
                 dto.getTrack1(),
                 dto.getTrack2()
         );
-
     }
+
+
+
+
 
 }

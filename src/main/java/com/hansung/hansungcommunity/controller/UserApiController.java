@@ -1,5 +1,6 @@
 package com.hansung.hansungcommunity.controller;
 
+import com.hansung.hansungcommunity.auth.CustomAuthentication;
 import com.hansung.hansungcommunity.dto.UserRequestDto;
 import com.hansung.hansungcommunity.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class UserApiController {
     private final UserService userService;
+
 
     /**
      * 유저 저장
@@ -40,5 +42,17 @@ public class UserApiController {
 
         return ResponseEntity.status(HttpStatus.OK).body(check);
     }
+
+    /**
+     * 유저 정보 반환
+     */
+    @GetMapping("/api/user-info")
+    public ResponseEntity<UserRequestDto> userInfo(Authentication authentication){
+        CustomAuthentication ca = (CustomAuthentication) authentication;
+        UserRequestDto userRequestDto = userService.getUserInfo(ca.getUser().getId());
+        return ResponseEntity.status(HttpStatus.OK).body(userRequestDto);
+
+    }
+
 
 }
